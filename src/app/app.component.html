@@ -1,0 +1,39 @@
+<header>
+  <div class="top-banner" style=" padding: 0px; display: flex; height: 40px;background-color: #242933;">
+    <img src="/assets/images/top_image.png" style="margin: 0 auto;" />
+  </div>
+  <nav class="navbar  d-flex justify-content-center col-md-12 h-100 d-inline-block mt-4">
+    <a class="navbar-brand" href="/">DevCommerce</a>
+    <form class="form-inline  col-md-6 offset-md-0">
+      <input class="form-control col-md-10" type="search" placeholder="Kedi Maması" aria-label="Search" style="width: 100%;">
+      <button class="btn" type="submit">ARA</button>
+    </form>
+    <a class="btn btn-outline-secondary w-10" href="/login">
+      <i class="fa fa-user fa-lg mr-2 "></i>Giriş Yap</a>
+    <a class="btn btn-secondary ml-2 w-10" href="/cart">
+      <i class="fa fa-shopping-cart fa-lg mr-2 "></i> Sepetim</a>
+  </nav>
+  <app-category></app-category>
+</header>
+
+<main role="main">
+  <app-banner></app-banner>
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <!-- <app-product></app-product> -->
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</main>
+
+<footer class="text-muted">
+  <div class="container">
+    <p class="float-right">
+      <a href="#">Back to top</a>
+    </p>
+    <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+    <p>New to Bootstrap?
+      <a href="../../">Visit the homepage</a> or read our
+      <a href="../../getting-started/">getting started guide</a>.</p>
+  </div>
+</footer>
