@@ -1,8 +1,8 @@
 export class Product {
-  CategoryId: number;
-  ProductId: number;
+  categoryId: number;
+  productId: number;
   productName: string;
-  QuantityPerUnit: number;
-  UnitPrice: number;
-  UnitsInStock: number;
+  quantityPerUnit: number;
+  unitPrice: number;
+  unitsInStock: number;
 }

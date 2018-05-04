@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="card">
+        <div class="row">
+            <aside class="col-sm-5 border-right">
+                <article class="gallery-wrap">
+                    <div class="img-big-wrap">
+                        <div>
+                            <a href="#">
+                                <img src="https://productimages.hepsiburada.net/s/7/552/9757080453170.jpg">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="img-small-wrap">
+                        <div class="item-gallery">
+                            <img src="https://productimages.hepsiburada.net/s/7/552/9757080453170.jpg"> </div>
+                        <div class="item-gallery">
+                            <img src="https://productimages.hepsiburada.net/s/7/552/9757080453170.jpg"> </div>
+                        <div class="item-gallery">
+                            <img src="https://productimages.hepsiburada.net/s/7/552/9757080453170.jpg"> </div>
+                        <div class="item-gallery">
+                            <img src="https://productimages.hepsiburada.net/s/7/552/9757080453170.jpg"> </div>
+                    </div>
+                </article>
+            </aside>
+            <aside class="col-sm-7">
+                <article class="card-body p-5">
+                    <h3 class="title mb-3">{{productDetail.productName}}</h3>
+
+                    <p class="price-detail-wrap">
+                        <span class="price h3 text-warning">
+                            <span class="currency">US $</span>
+                            <span class="num">{{productDetail.unitPrice}}</span>
+                        </span>
+                        <span>{{productDetail.quantityPerUnit}}</span>
+                    </p>
+                    <dl class="item-property">
+                        <dt>Description</dt>
+                        <dd>
+                            <p>Here goes description consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco </p>
+                        </dd>
+                    </dl>
+                    <dl class="param param-feature">
+                        <dt>ProductID#</dt>
+                        <dd>{{productDetail.productId}}</dd>
+                    </dl>
+                    <dl class="param param-feature">
+                        <dt>Stock</dt>
+                        <dd>{{productDetail.unitsInStock}}</dd>
+                    </dl>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <dl class="param param-inline">
+                                <dt>Quantity: </dt>
+                                <dd>
+                                    <select class="form-control form-control-sm" style="width:70px;">
+                                        <option> 1 </option>
+                                        <option> 2 </option>
+                                        <option> 3 </option>
+                                    </select>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <hr>
+                    <a href="#" class="btn btn-lg btn-primary text-uppercase"> Buy now </a>
+                    <a href="#" class="btn btn-lg btn-outline-primary text-uppercase">
+                        <i class="fa fa-shopping-cart"></i> Add to cart </a>
+                </article>
+            </aside>
+        </div>
+    </div>
+</div>
