@@ -54,10 +54,10 @@
                             <dl class="param param-inline">
                                 <dt>Quantity: </dt>
                                 <dd>
-                                    <select class="form-control form-control-sm" style="width:70px;">
-                                        <option> 1 </option>
-                                        <option> 2 </option>
-                                        <option> 3 </option>
+                                    <select #quantity class="form-control form-control-sm" style="width:70px;">
+                                        <option [value]="1"> 1 </option>
+                                        <option [value]="2"> 2 </option>
+                                        <option [value]="3"> 3 </option>
                                     </select>
                                 </dd>
                             </dl>
@@ -65,8 +65,8 @@
                     </div>
                     <hr>
                     <a href="#" class="btn btn-lg btn-primary text-uppercase"> Buy now </a>
-                    <a href="#" class="btn btn-lg btn-outline-primary text-uppercase">
-                        <i class="fa fa-shopping-cart"></i> Add to cart </a>
+                    <button class="btn btn-lg btn-outline-primary text-uppercase" (click)="addToCart(quantity.value)">
+                        <i class="fa fa-shopping-cart"></i> Add to cart </button>
                 </article>
             </aside>
         </div>

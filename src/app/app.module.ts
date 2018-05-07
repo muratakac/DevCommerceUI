@@ -40,8 +40,8 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes, {
       // useHash: true,
-      preloadingStrategy: PreloadAllModules,
-      onSameUrlNavigation: 'reload',
+      // preloadingStrategy: PreloadAllModules,
+      // onSameUrlNavigation: 'reload',
       // enableTracing:true
     })
   ],

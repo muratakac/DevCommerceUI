@@ -5,4 +5,5 @@ export class ProductDetail {
     quantityPerUnit: number;
     unitPrice: number;
     unitsInStock: number;
+    quantity: number;
 }

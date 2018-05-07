@@ -1,3 +1,44 @@
-<p>
-  cart works!
-</p>
+<div class="container row">
+  <h1>Sepetim</h1>
+</div>
+<hr>
+<br>
+<div class="carts-body-container row">
+  <div class="cart-product-container container row" *ngFor="let item of cartProducts; let i=index">
+    <div class="col-md-5">
+      <img src="https://productimages.hepsiburada.net/s/7/552/9757080453170.jpg" alt="" class="custom-image-style">
+    </div>
+    <div class="cart-product-desc col-md-3">
+      <div>
+        <p>{{item.productName}}</p>
+      </div>
+      <div>
+        <p>
+          <strong>${{item.unitPrice*item.quantity}}</strong>
+        </p>
+      </div>
+    </div>
+    <div class="edit-cart-container col-md-2">
+      <input type="number" class="form-control" value="{{item.quantity}}">
+    </div>
+    <div id="xbutton" class="col-md-2">
+      <a class="text-danger" (click)="removeItem(i)">
+        <strong>X</strong>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="container row" *ngIf="!cartProducts.length">
+  <div class="col-md-4 offset-md-4">Sepette Ürün Yok</div>
+</div>
+
+<div class="bill-container">
+    <div class="col-md-4 offset-md-8">
+      <button class="btn btn-success btn-lg pull-left" (click)="payBill()">Satın Al</button>
+    </div>
+    <div class="col-md-4 offset-md-8" style="margin-top: 10px;">
+      <span *ngIf="!cartProducts.length"><strong>$0</strong></span>
+      <span *ngIf="cartProducts.length"><strong style="margin-left: 20px;">${{bill}}</strong></span>    
+    </div>
+  </div>
