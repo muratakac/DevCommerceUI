@@ -19,6 +19,7 @@ export class CategoryComponent implements OnInit {
   getCategories(){
     this.categoryService.getCategories().subscribe(res => {
       this.categories = res;
+      this.categories = res.filter(x => x.parentId == null);
     });
   }
 

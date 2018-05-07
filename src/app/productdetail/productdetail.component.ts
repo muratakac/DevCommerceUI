@@ -32,9 +32,10 @@ export class ProductdetailComponent implements OnInit {
     }
 
     // console.log(this.productId);
-    this.productDetailService.getProducts()
+    this.productDetailService.getProducts(this.productId)
       .subscribe(res => {
-        this.productDetail = res.find(x => x.productId == this.productId);
+        //this.productDetail = res.find(x => x.productId == this.productId);
+        this.productDetail = res;
       });
   }
 

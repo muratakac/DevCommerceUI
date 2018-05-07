@@ -9,7 +9,8 @@ export class ProductService {
 
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(
-      "http://northwindapi.azurewebsites.net/api/products"
+      // "http://northwindapi.azurewebsites.net/api/products"
+      "http://localhost:57443/api/product"
     );
   }
 }
