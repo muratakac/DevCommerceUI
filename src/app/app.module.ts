@@ -21,7 +21,9 @@ import { RegisterComponent } from "./register/register.component";
 import {
   UserService,
   AlertService,
-  AuthenticationService
+  AuthenticationService,
+  ProductService,
+  CategoryService
 } from "./_services/references";
 import { AlertComponent } from "./_directives/alert.component";
 import { AuthAttr } from "./_attr/auth.service";
@@ -35,6 +37,7 @@ const routes: Routes = [
   { path: "productdetail", component: ProductdetailComponent },
   { path: "cart", component: CartComponent, canActivate: [AuthAttr] },
   { path: "login", component: LoginComponent },
+  { path: "logout", component: LoginComponent},
   { path: "register", component: RegisterComponent },
   { path: "**", component: NotFoundComponent }
 ];
@@ -58,12 +61,19 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forRoot(routes, {
       // useHash: true,
-      // preloadingStrategy: PreloadAllModules,
-      // onSameUrlNavigation: 'reload',
+      //  preloadingStrategy: PreloadAllModules,
+      //  onSameUrlNavigation: 'reload',
       // enableTracing:true
     })
   ],
-  providers: [UserService, AlertService, AuthenticationService, AuthAttr],
+  providers: [
+    UserService,
+    AlertService,
+    AuthenticationService,
+    AuthAttr,
+    ProductService,
+    CategoryService
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

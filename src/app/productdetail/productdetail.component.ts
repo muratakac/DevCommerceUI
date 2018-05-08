@@ -1,26 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProductDetail } from './productDetail'
-import { CartProduct } from './cartProduct'
-import { ProductdetailService } from './productdetail.service'
-import { Product } from '../product/product';
+import { Product, CartProduct } from "../_models/references";
+import { ProductService, AlertService } from "../_services/references";
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-productdetail',
   templateUrl: './productdetail.component.html',
-  styleUrls: ['./productdetail.component.css'],
-  providers: [ProductdetailService]
+  styleUrls: ['./productdetail.component.css']
 })
 
-export class ProductdetailComponent implements OnInit {
+export class ProductdetailComponent implements OnInit, OnDestroy {
+  private subscription: ISubscription;
 
-  productDetail: ProductDetail;
-  products: ProductDetail[];
+  productDetail: Product;
+  products: Product[];
   productId: number;
   cartProducts: any;
 
-  constructor(private route: ActivatedRoute, private productDetailService: ProductdetailService) {
-    this.route.queryParams.subscribe(params => {
+  constructor(private route: ActivatedRoute,
+    private productDetailService: ProductService,
+    private alertService: AlertService) {
+    this.subscription = this.route.queryParams.subscribe(params => {
       this.productId = params['productId'];
     });
   }
@@ -31,8 +32,7 @@ export class ProductdetailComponent implements OnInit {
       this.cartProducts = JSON.parse(data);
     }
 
-    // console.log(this.productId);
-    this.productDetailService.getProducts(this.productId)
+    this.subscription = this.productDetailService.getProductByProductId(this.productId)
       .subscribe(res => {
         //this.productDetail = res.find(x => x.productId == this.productId);
         this.productDetail = res;
@@ -53,9 +53,14 @@ export class ProductdetailComponent implements OnInit {
     cartData.push(product);
     this.updateCartData(cartData);
     localStorage.setItem('cart', JSON.stringify(cartData));
+    this.alertService.success('Ürün sepetinize eklendi', true);
   }
   updateCartData(cartData) {
     this.cartProducts = cartData;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
 

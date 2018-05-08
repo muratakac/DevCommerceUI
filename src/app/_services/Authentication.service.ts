@@ -5,19 +5,27 @@ import "rxjs/add/operator/map";
 
 @Injectable()
 export class AuthenticationService {
-  constructor(private http: HttpClient) {}
+  url = "http://localhost:57443/api/account/";
+  token: string;
+
+  constructor(private http: HttpClient) { }
 
   login(username: string, password: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.token
+      })
+    };
+
     return this.http
-      .post<any>("http://localhost:57443/api/account/Login", {
+      .post<any>(this.url + "Login", {
         username: username,
         password: password
-      })
+      }, httpOptions)
       .map(user => {
-        // login successful if there's a jwt token in the response
         // if (user && user.token) {
         if (user) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem("currentUser", JSON.stringify(user));
         }
 
@@ -26,7 +34,26 @@ export class AuthenticationService {
   }
 
   logout() {
-    // remove user from local storage to log user out
     localStorage.removeItem("currentUser");
+  }
+
+  createToken() {
+    return this.http.post(this.url + "GetToken",
+      {
+        "CompanyName": "CodeDev",
+        "ProjectName": "Commerce",
+        "TokenKey": "Admin",
+        "TokenValue": "Admin123"
+      },
+      {
+        headers: new HttpHeaders().set('Content-Type', 'application/json'),
+        responseType: 'text'
+      }
+    ).map(token => {
+      if (token) {
+        this.token =  'Bearer ' + token.replace('"', '');
+        localStorage.setItem("token", this.token);
+      }
+    });
   }
 }

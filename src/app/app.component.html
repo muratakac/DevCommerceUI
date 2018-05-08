@@ -1,4 +1,4 @@
-<header>
+<header >
   <div class="top-banner" style=" padding: 0px; display: flex; height: 40px;background-color: #242933;">
     <img src="/assets/images/top_image.png" style="margin: 0 auto;" />
   </div>
@@ -8,16 +8,18 @@
       <input class="form-control col-md-10" type="search" placeholder="Kedi Maması" aria-label="Search" style="width: 100%;">
       <button class="btn" type="submit">ARA</button>
     </form>
-    <a class="btn btn-outline-secondary w-10" href="/login">
-      <i class="fa fa-user fa-lg mr-2 "></i>Giriş Yap</a>
+    <a class="btn btn-outline-secondary w-10" href="/login" *ngIf="currentUser==null&&isShow" >
+      <i class="fa fa-user fa-lg mr-2 "></i>Giriş</a>
+      <a class="btn btn-outline-secondary w-10" href="/logout"  *ngIf="currentUser!=null">
+        <i class="fa fa-user fa-lg mr-2 "></i>Çıkış</a>
     <a class="btn btn-secondary ml-2 w-10" href="/cart">
       <i class="fa fa-shopping-cart fa-lg mr-2 "></i> Sepetim</a>
   </nav>
-  <app-category></app-category>
+  <app-category *ngIf="isShow"></app-category>
 </header>
 
 <main role="main">
-  <app-banner></app-banner>
+  <app-banner *ngIf="isShow"></app-banner>
   <div class="album py-5 bg-light">
     <div class="container">
       <!-- <app-product></app-product> -->
@@ -27,7 +29,7 @@
   </div>
 </main>
 
-<footer class="text-muted">
+<footer class="text-muted" *ngIf="isShow">
   <div class="container">
     <p class="float-right">
       <a href="#">Back to top</a>

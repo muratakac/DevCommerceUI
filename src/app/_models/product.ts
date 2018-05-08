@@ -7,4 +7,5 @@ export class Product {
   unitsInStock: number;
   description:string;
   brandId:number;
+  quantity:number;
 }

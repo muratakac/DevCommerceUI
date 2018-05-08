@@ -1,19 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { Product } from "./product";
-import { ProductService } from "./product.service";
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Product } from "../_models/references";
+import { ProductService } from "../_services/references";
 import { Router, ActivatedRoute } from '@angular/router';
-import { tick } from "@angular/core/testing";
-import { range } from "rxjs/observable/range";
-import { Observer } from "rxjs";
+import { ISubscription } from "rxjs/Subscription";
+
 
 @Component({
   selector: "app-product",
   templateUrl: "./product.component.html",
   styleUrls: ["./product.component.css"],
-  providers: [ProductService]
 })
 
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, OnDestroy {
+  private subscription: ISubscription;
+
   Math: any;
 
   categoryId: number;
@@ -26,7 +26,7 @@ export class ProductComponent implements OnInit {
   pageArray: number[] = new Array();;
 
   constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) {
-    this.route.queryParams.subscribe(params => {
+    this.subscription = this.route.queryParams.subscribe(params => {
       this.categoryId = params['categoryId'];
       this.getProducts();
     });
@@ -37,7 +37,8 @@ export class ProductComponent implements OnInit {
   }
 
   getProducts() {
-    this.productService.getProducts().subscribe(res => {
+    let token = localStorage.getItem("token");
+    this.subscription = this.productService.getProducts().subscribe(res => {
       if (this.categoryId !== undefined) {
         this.products = res.filter(x => x.categoryId == this.categoryId);
       }
@@ -60,5 +61,9 @@ export class ProductComponent implements OnInit {
     this.currentPage = (currentPage - 1) * 9;
     this.getProducts();
     this.current = currentPage;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

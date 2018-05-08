@@ -1,14 +1,16 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { AlertService, UserService } from "../_services/references";
+import { ISubscription } from "rxjs/Subscription";
 @Component({
   moduleId: module.id,
   selector: "app-register",
-  templateUrl: "./register.component.html",
-  styleUrls: ["./register.component.css"]
+  templateUrl: "./register.component.html"
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
+
+  private subscription: ISubscription;
   model: any = {};
   loading = false;
 
@@ -16,13 +18,13 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private responseService: AlertService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   register() {
     this.loading = true;
-    this.userService.create(this.model).subscribe(
+    this.subscription = this.userService.create(this.model).subscribe(
       data => {
         this.responseService.success('Kullanıcı Oluşturuldu', true);
         this.router.navigate(["login"]);
@@ -33,4 +35,9 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
+  
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
 }

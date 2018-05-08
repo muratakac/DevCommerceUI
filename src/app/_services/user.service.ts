@@ -1,13 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { User } from '../_models/user';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { User } from '../_models/references';
 
 @Injectable()
 export class UserService {
-
-    constructor(private http: HttpClient) { }
+    url = "http://localhost:57443/api/account/register";
+    token: string;
+    constructor(private http: HttpClient) { 
+        this.token = localStorage.getItem("token");
+    }
 
     create(user: User) {
-        return this.http.post('http://localhost:57443/api/account/register', user);
+        const httpOptions = {
+            headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+              'Authorization':  this.token
+            })
+          };
+        return this.http.post(this.url, user, httpOptions);
     }
 }

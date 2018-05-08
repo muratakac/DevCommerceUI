@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AlertService, AuthenticationService } from '../_services/references';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   moduleId: module.id,
-  templateUrl: 'login.component.html'
+  templateUrl: 'login.component.html',
+  styleUrls: ["./login.component.css"]
 })
-export class LoginComponent implements OnInit {
 
+export class LoginComponent implements OnInit,OnDestroy  {
+  private subscription: ISubscription;
   model: any = {};
   loading = false;
   returnUrl: string;
@@ -29,7 +32,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loading = true;
-    this.authenticationService.login(this.model.username, this.model.password)
+    this.subscription = this.authenticationService.login(this.model.username, this.model.password)
       .subscribe(
         data => {
           this.router.navigate([this.returnUrl]);
@@ -38,5 +41,16 @@ export class LoginComponent implements OnInit {
           this.alertService.error(error);
           this.loading = false;
         });
+  }
+
+  logout() {
+    debugger
+    this.loading = true;
+    this.authenticationService.logout();
+    this.router.navigate(['/products']);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

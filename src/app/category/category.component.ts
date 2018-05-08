@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Category } from "./category";
-import { CategoryService } from "./category.service";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Category } from "../_models/references";
+import { CategoryService } from "../_services/references";
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-category',
@@ -8,7 +9,8 @@ import { CategoryService } from "./category.service";
   styleUrls: ['./category.component.css'],
   providers: [CategoryService]
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent implements OnInit, OnDestroy {
+  private subscription: ISubscription;
   categories: Category[];
   constructor(private categoryService: CategoryService) { }
 
@@ -16,11 +18,15 @@ export class CategoryComponent implements OnInit {
     this.getCategories();
   }
 
-  getCategories(){
-    this.categoryService.getCategories().subscribe(res => {
+  getCategories() {
+    this.subscription = this.categoryService.getCategories().subscribe(res => {
       this.categories = res;
       this.categories = res.filter(x => x.parentId == null);
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }
