@@ -10,8 +10,8 @@
     </form>
     <a class="btn btn-outline-secondary w-10" href="/login" *ngIf="currentUser==null&&isShow" >
       <i class="fa fa-user fa-lg mr-2 "></i>Giriş</a>
-      <a class="btn btn-outline-secondary w-10" href="/logout"  *ngIf="currentUser!=null">
-        <i class="fa fa-user fa-lg mr-2 "></i>Çıkış</a>
+      <button class="btn btn-outline-secondary w-10"  (click)="logout()"  *ngIf="currentUser!=null">
+        <i class="fa fa-user fa-lg mr-2 "></i>Çıkış</button>
     <a class="btn btn-secondary ml-2 w-10" href="/cart">
       <i class="fa fa-shopping-cart fa-lg mr-2 "></i> Sepetim</a>
   </nav>

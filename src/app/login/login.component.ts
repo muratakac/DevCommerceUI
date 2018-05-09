@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { AlertService, AuthenticationService } from '../_services/references';
+import { AlertService, AuthenticationService, CommunicationService } from '../_services/references';
 import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
@@ -10,16 +10,18 @@ import { ISubscription } from 'rxjs/Subscription';
   styleUrls: ["./login.component.css"]
 })
 
-export class LoginComponent implements OnInit,OnDestroy  {
-  private subscription: ISubscription;
+export class LoginComponent implements OnInit, OnDestroy {
   model: any = {};
   loading = false;
   returnUrl: string;
+
+  private subscription: ISubscription;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
+    private communicationService: CommunicationService,
     private alertService: AlertService) { }
 
   ngOnInit() {
@@ -41,13 +43,7 @@ export class LoginComponent implements OnInit,OnDestroy  {
           this.alertService.error(error);
           this.loading = false;
         });
-  }
-
-  logout() {
-    debugger
-    this.loading = true;
-    this.authenticationService.logout();
-    this.router.navigate(['/products']);
+    this.communicationService.callMethod("login");
   }
 
   ngOnDestroy() {

@@ -23,7 +23,8 @@ import {
   AlertService,
   AuthenticationService,
   ProductService,
-  CategoryService
+  CategoryService,
+  CommunicationService
 } from "./_services/references";
 import { AlertComponent } from "./_directives/alert.component";
 import { AuthAttr } from "./_attr/auth.service";
@@ -37,7 +38,6 @@ const routes: Routes = [
   { path: "productdetail", component: ProductdetailComponent },
   { path: "cart", component: CartComponent, canActivate: [AuthAttr] },
   { path: "login", component: LoginComponent },
-  { path: "logout", component: LoginComponent},
   { path: "register", component: RegisterComponent },
   { path: "**", component: NotFoundComponent }
 ];
@@ -62,7 +62,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {
       // useHash: true,
       //  preloadingStrategy: PreloadAllModules,
-      //  onSameUrlNavigation: 'reload',
+      //onSameUrlNavigation: 'reload',
       // enableTracing:true
     })
   ],
@@ -72,7 +72,8 @@ const routes: Routes = [
     AuthenticationService,
     AuthAttr,
     ProductService,
-    CategoryService
+    CategoryService,
+    CommunicationService
   ],
   bootstrap: [AppComponent]
 })
